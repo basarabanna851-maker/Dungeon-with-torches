@@ -1,2 +1,91 @@
-# Dungeon-with-torches
-A dungeon labyrinth, explored from a first-person perspective. The labyrinth is randomly generated (each playthrough produces a new map). Stone walls. Torches flicker, serving as point light sources.
+# Dungeon with torches
+
+Лабиринт-подземелье, который исследуется от первого лица. Лабиринт генерируется случайно: при каждом запуске и при переходе на новый уровень карта получается разной. Курсовая работа по OpenGL.
+
+## Возможности
+
+- случайная генерация подземелья (комнаты, коридоры, лестницы)
+- вид от первого лица, мышь и клавиатура
+- освещение от факелов, туман, шейдеры на GLSL
+- двери и предметы, с которыми можно взаимодействовать
+- монстры
+- выносливость (стамина) при беге
+- мини-карта и полная карта подземелья
+- переход на следующий уровень через выход
+
+## Управление
+
+| Клавиша / действие | Что делает |
+|---|---|
+| Левая кнопка мыши | захватить курсор (включить обзор мышью) |
+| Мышь | осмотреться |
+| W / S или стрелки вверх / вниз | вперёд / назад |
+| A / D | шаг влево / вправо |
+| Стрелки влево / вправо | поворот камеры |
+| Left Shift | бег (тратит выносливость) |
+| E | взаимодействовать (двери, предметы) |
+| M | показать / скрыть полную карту |
+| Space | перезапуск после смерти |
+| Esc | освободить курсор, повторное нажатие закрывает игру |
+
+## Технологии
+
+- C++17
+- OpenGL
+- GLFW 3, GLAD, GLM
+- CMake, vcpkg
+- Visual Studio 2022
+
+## Сборка и запуск
+
+### Что нужно
+
+- Windows, Visual Studio 2022 с компонентом «Разработка классических приложений на C++» (включает CMake)
+- [vcpkg](https://github.com/microsoft/vcpkg)
+- видеокарта с поддержкой OpenGL 3.3 или выше
+
+### Шаги
+
+1. Установить зависимости через vcpkg:
+
+   ```
+   vcpkg install glfw3 glad glm --triplet x64-windows
+   ```
+
+2. Задать переменную окружения `VCPKG_ROOT` с путём к папке vcpkg, например `C:\bin\vcpkg`. После этого перезапустить Visual Studio.
+
+   Если переменная не задана, откройте `CMakePresets.json` и вместо `$env{VCPKG_ROOT}` впишите свой путь к vcpkg:
+
+   ```
+   "toolchainFile": "C:/путь/к/vcpkg/scripts/buildsystems/vcpkg.cmake"
+   ```
+
+3. Клонировать репозиторий:
+
+   ```
+   git clone https://github.com/basarabanna851-maker/Dungeon-with-torches.git
+   ```
+
+4. Открыть папку проекта в Visual Studio 2022 (**Файл → Открыть → Папка**). CMake настроится автоматически.
+
+5. Выбрать цель `app` и нажать **Запуск** (F5).
+
+### Сборка из командной строки
+
+```
+cmake --preset default
+cmake --build out/build/default --config Release
+```
+
+## Структура проекта
+
+```
+main.cpp            весь исходный код игры
+CMakeLists.txt      описание сборки
+CMakePresets.json   настройки CMake (путь к vcpkg)
+CMakeSettings.json  настройки Visual Studio (старый формат)
+```
+
+## Автор
+
+basarabanna851-maker
